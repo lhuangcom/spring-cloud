@@ -1,0 +1,44 @@
+spring:
+  application:
+   name: spring-cloud-producer
+  # 分布式session配置，redis使用默认配置
+  session:
+    store-type: redis
+    #默认30m
+    timeout: 10s
+
+
+#  zipkin:
+#    base-url: http://localhost:8060
+#  sleuth:
+#    sampler:
+#      percentage: 1
+
+
+eureka:
+  client:
+   serviceUrl:
+    defaultZone: http://localhost:8080/eureka/
+   healthcheck:
+     enabled: true
+  instance:
+    prefer-ip-address: true
+
+
+info:
+  username: lhuang
+
+server:
+  port: 8011
+
+# apollo 配置中心配置
+env: dev
+app.id: product
+# set apollo meta server address, adjust to actual address if necessary
+apollo.meta: http://127.0.0.1:8080
+# will inject 'application' namespace in bootstrap phase
+apollo.bootstrap.enabled: true
+# will inject 'application' and 'FX.apollo' namespaces in bootstrap phase
+apollo.bootstrap.namespaces: application.yml
+
+

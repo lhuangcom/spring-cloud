@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    config:
+      label: master
+      profile: dev
+      # uri: http://localhost:8888/      #配置高可用服务集群不需要再配置
+      name: spring.cloud.config.server  #配置访问服务器的application.name,否则使用当前项目的application.name
+      discovery:
+        enabled: true    #开启Config服务发现支持
+        service-id: spring.cloud.config.server   #指定server端的name
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka/   # 注册中心eurka地址

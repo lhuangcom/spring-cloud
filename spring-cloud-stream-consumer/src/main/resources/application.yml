@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: spring-cloud-stream-consumer
+  rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
+    port: 5672
+  cloud:
+    stream:
+      bindings:
+        input:
+          group: produce-service-A
+          destination: topic
+          consumer:
+            max-attempts: 1   #消息处理失败重试的次数，默认为3
+#           partitioned: true  #消费分区的配置
+#      instance-count: 2
+#      instance-index: 1
+      rabbit:
+        bindings:
+          input:
+            consumer:
+              auto-bind-dlq: true
+              republish-to-dlq: true
+              dlq-ttl: 10000   #在dlq中的存活时间
+
+
+server:
+  port: 0  #方便在本地启动多实例
+

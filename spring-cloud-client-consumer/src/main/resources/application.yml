@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: spring-cloud-consumer
+  session:
+    store-type: redis
+
+server:
+  port: 8020
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7000/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+#由于Security 自定义了熔断策略，所以配置这个就可以获取SecurityContext
+hystrix:
+  shareSecurityContext: true
+
+feign:
+  hystrix:
+    enabled: true
+
+#解决第一次调用超时的问题
+ribbon:
+  eager-load:
+    enabled: true
+    clients:
+      -spring-cloud-producer

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: product
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    org.springframework.cloud.netflix.feign: debug
+
+server:
+  port: 0

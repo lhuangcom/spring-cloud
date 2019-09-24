@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: gateway-service-zuul
+#  zipkin:
+#    base-url: http://localhost:8060
+#  sleuth:
+#    sampler:
+#      percentage: 1
+
+server:
+  port: 8030
+
+eureka:
+  client:
+   serviceUrl:
+    defaultZone: http://localhost:7000/eureka/
+
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 300000
+
+### Ribbon 配置
+ribbon:
+  # http建立socket超时时间,毫秒
+  ConnectTimeout: 8000
+  # http读取响应socket超时时间
+  ReadTimeout: 8000
+  # 同一台实例最大重试次数,不包括首次调用
+  #MaxAutoRetries: 1
+  # 重试负载均衡其他的实例最大重试次数,不包括首次server
+  #MaxAutoRetriesNextServer: 1
+  # 是否所有操作都重试，POST请求注意多次提交错误。
+  # 默认false，设定为false的话，只有get请求会重试
+  #OkToRetryOnAllOperations: true
+zuul:
+  #retryable: true
+  routes:
+    #简写方法
+    spring-cloud-producer: /producer/**
+    spring-cloud-consumer: /consumer/**
+#      path: /producer/**
+#      serviceId: spring-cloud-producer
+  ignored-patterns: "*"
+#  ribbon:
+#   eager-load:
+#    enabled: true
+
+feign:
+  hystrix:
+    enabled: true
